@@ -38,10 +38,13 @@ print_words(filename), которая подсчитывает, как част�
 import sys
 import string
 
+__author__ = "Vitaly Bibikov"
+__version__ = "0.1"
+
 def print_words(filename):
 
     wordsDict = read_dict(filename)               
-    for key in sorted(wordsDict.keys()):
+    for key in sorted(wordsDict):
         print(key, wordsDict[key]) 
         
     return
