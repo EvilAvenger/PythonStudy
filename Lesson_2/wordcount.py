@@ -41,26 +41,29 @@ import string
 __author__ = "Vitaly Bibikov"
 __version__ = "0.1"
 
+
 def print_words(filename):
 
-    wordsDict = read_dict(filename)               
+    wordsDict = read_dict(filename)
     for key in sorted(wordsDict):
-        print(key, wordsDict[key]) 
-        
+        print(key, wordsDict[key])
+
     return
+
 
 def print_top(filename):
 
     words = read_dict(filename)
-    list = sorted(words.items(), key=lambda x:x[-1], reverse=True)
+    list = sorted(words.items(), key=lambda x: x[-1], reverse=True)
     for value in list[:20]:
-        print(value) 
+        print(value)
 
     return
 
+
 def read_dict(filename):
     wordsDict = dict()
-    file = open(filename,"r",encoding="utf-8")
+    file = open(filename, "r", encoding="utf-8")
     strip = string.whitespace + string.punctuation
     words = []
 
@@ -68,9 +71,9 @@ def read_dict(filename):
         words = [word.lower().strip(strip) for word in file.read().split()]
         for word in words:
             if word in wordsDict:
-                wordsDict[word] +=1
+                wordsDict[word] += 1
             else:
-                wordsDict[word] = 1                 
+                wordsDict[word] = 1
     finally:
         file.close()
 
@@ -80,12 +83,15 @@ def read_dict(filename):
 # Определите и заполните функции print_words(filename) и print_top(filename).
 # Вы также можете написать вспомогательную функцию, которая читает файл,
 # строит по нему словарь слово/количество и возвращает этот словарь.
-# Затем print_words() и print_top() смогут просто вызывать эту вспомогательную функцию.
+# Затем print_words() и print_top() смогут просто вызывать эту
+# вспомогательную функцию.
 
 ###
 
 # Это базовый код для разбора аргументов коммандной строки.
 # Он вызывает print_words() и print_top(), которые необходимо определить.
+
+
 def main():
     if len(sys.argv) != 3:
         print('usage: python wordcount.py {--count | --topcount} file')

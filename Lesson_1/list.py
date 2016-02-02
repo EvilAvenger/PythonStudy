@@ -12,14 +12,14 @@
 # A. Начало и конец совпадают
 # Функция принимает в качестве аргумента список строк.
 # Необходимо вернуть количество строк,
-# длина которых составляет 2 символа и более, 
+# длина которых составляет 2 символа и более,
 # а первый и последний символы этих строк совпадают.
 # Примечание: в python нет оператора ++. Но += сработает.
 def match_ends(words):
     count = 0
     for word in words:
-        if len(word)>= 2 and word[0] == word[-1]:
-            count+=1
+        if len(word) >= 2 and word[0] == word[-1]:
+            count += 1
     return count
 
 
@@ -29,7 +29,8 @@ def match_ends(words):
 # сначала идет группа строк, начинающихся на 'x', затем все остальные.
 # Наример: из ['mix', 'xyz', 'apple', 'xanadu', 'aardvark'] получится
 # ['xanadu', 'xyz', 'aardvark', 'apple', 'mix']
-# Подсказка: это можно сделать при помощи склеивания 2х заранее отсортированных списков
+# Подсказка: это можно сделать при помощи склеивания 2х заранее
+# отсортированных списков
 def front_x(words):
     xWords = []
     newWords = []
@@ -39,40 +40,38 @@ def front_x(words):
         else:
             newWords.append(word)
     xWords = sorted(xWords)
-    newWords = sorted(newWords)         
+    newWords = sorted(newWords)
     return xWords + newWords
 
 
 # C. Сортировка по последнему числу
-# Дан спискок непустых списков. 
-# Нужно вернуть список, отсортированный по 
+# Дан спискок непустых списков.
+# Нужно вернуть список, отсортированный по
 # возрастанию последнего элемента каждого подсписка.
 # Например: из [[1, 7], [1, 3], [3, 4, 5], [2, 2]] получится
 # [[2, 2], [1, 3], [3, 4, 5], [1, 7]]
-# Подсказка: используйте параметр key= функции сортировки, 
+# Подсказка: используйте параметр key= функции сортировки,
 # чтобы получить последний элемент подсписка.
 
 def sort_last(lists):
     def sorter(x):
         x = x[-1]
         return x
-    lists = sorted(lists,key=sorter)
+    lists = sorted(lists, key=sorter)
     return lists
-
 
 
 # D. Удаление соседей
 # Дан список чисел.
 # Нужно вернуть список, где все соседние элементы
 # были бы сведены к одному элементу.
-# Таким образом, из [1, 2, 2, 3, 4, 4] получится [1, 2, 3, 4]. 
+# Таким образом, из [1, 2, 2, 3, 4, 4] получится [1, 2, 3, 4].
 def remove_adjacent(nums):
     adjustedList = nums[:1]
     for num in nums:
         if adjustedList[-1] != num:
             adjustedList.append(num)
     return adjustedList
-
 
 
 # Простая функция test() используется в main() для вывода
@@ -82,7 +81,8 @@ def test(got, expected):
         prefix = ' OK '
     else:
         prefix = '  X '
-    print('%s Получено: %s | Ожидалось: %s' % (prefix, repr(got), repr(expected)))
+    print('%s Получено: %s | Ожидалось: %s' %
+          (prefix, repr(got), repr(expected)))
 
 
 # Вызывает фунции выше с тестовыми параметрами.
@@ -95,20 +95,20 @@ def main():
     print()
     print('Начинающиеся с X в начале')
     test(front_x(['bbb', 'ccc', 'axx', 'xzz', 'xaa']),
-       ['xaa', 'xzz', 'axx', 'bbb', 'ccc'])
+         ['xaa', 'xzz', 'axx', 'bbb', 'ccc'])
     test(front_x(['ccc', 'bbb', 'aaa', 'xcc', 'xaa']),
-       ['xaa', 'xcc', 'aaa', 'bbb', 'ccc'])
+         ['xaa', 'xcc', 'aaa', 'bbb', 'ccc'])
     test(front_x(['mix', 'xyz', 'apple', 'xanadu', 'aardvark']),
-       ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
+         ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
 
     print()
     print('Сортировка по последнему числу')
     test(sort_last([[1, 3], [3, 2], [2, 1]]),
-       [[2, 1], [3, 2], [1, 3]])
+         [[2, 1], [3, 2], [1, 3]])
     test(sort_last([[2, 3], [1, 2], [3, 1]]),
-       [[3, 1], [1, 2], [2, 3]])
+         [[3, 1], [1, 2], [2, 3]])
     test(sort_last([[1, 7], [1, 6], [3, 4, 5], [2, 2]]),
-       [[2, 2], [3, 4, 5], [1, 6], [1, 7]])
+         [[2, 2], [3, 4, 5], [1, 6], [1, 7]])
 
     print()
     print('Удаление соседей')

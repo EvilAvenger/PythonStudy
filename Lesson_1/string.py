@@ -82,7 +82,7 @@ def not_bad(s):
     index = s.find(str1)
     index2 = s.find(str2)
     if index > 0 and index2 > 0 and index2 > index:
-        s = "{0}{1}{2}".format(s[0 : index], str3,s[index2 + len(str2):])
+        s = "{0}{1}{2}".format(s[0: index], str3, s[index2 + len(str2):])
     return s
 
 
@@ -95,17 +95,14 @@ def not_bad(s):
 # 1-половина-a + 1-половина-b + 2-половина-a + 2-половина-b
 def front_back(a, b):
     result = "{0}{1}{2}{3}".format(
-        split_Word(a, False), split_Word(b, False), split_Word(a,True), split_Word(b, True))
+        split_Word(a, False), split_Word(b, False), split_Word(a, True), split_Word(b, True))
     return result
+
 
 def split_Word(word, revert):
     index = int(len(word) / 2)
-    if len(word) % 2 != 0:
-        index += 1
-    if not revert:
-        result = word[0:index]
-    else:
-        result = word[index:]
+    index += len(word) % 2
+    result = word[0:index] if not revert else word[index:]
     return result
 
 

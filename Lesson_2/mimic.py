@@ -36,27 +36,28 @@ import codecs
 
 PARSE_EXPRESSION = "!><?#-:.,;«»“="
 
+
 def mimic_dict(filename):
     """Возвращает имитационный словарь, сопоставляющий каждое слово 
     со списом слов, которые непосредственно следуют за ним в тексте"""
     wordDic = {}
     lines = []
-    file = open(filename,'r', encoding="utf-8")
+    file = open(filename, 'r', encoding="utf-8")
     try:
         lines = [word for word in file.read().split()]
         wordDic[""] = set([lines[0]])
         prevWord = ""
         for word in lines:
-            if prevWord == "":    
+            if prevWord == "":
                 prevWord = word.lower().strip(PARSE_EXPRESSION)
             else:
                 if prevWord in wordDic:
                     wordDic[prevWord].add(word)
                 else:
-                    wordDic[prevWord] = {word}  
+                    wordDic[prevWord] = {word}
                 prevWord = word.lower().strip(PARSE_EXPRESSION)
 
-    finally:    
+    finally:
         file.close()
     return wordDic
 
@@ -65,8 +66,8 @@ def print_mimic(mimic_dict, word, i, sentence):
     """Принимает в качестве аргументов имитационный словарь и начальное слово,
     выводит 200 случайных слов."""
     sentence = ' '.join((sentence, word))
-    while i<=200:
-        i+=1
+    while i <= 200:
+        i += 1
         word = word.lower().strip(PARSE_EXPRESSION)
         if word in mimic_dict:
             myList = mimic_dict[word]
@@ -74,7 +75,7 @@ def print_mimic(mimic_dict, word, i, sentence):
             myList = mimic_dict[""]
 
         randomWord = random.choice(list(myList))
-        return print_mimic(mimic_dict, randomWord, i, sentence)  
+        return print_mimic(mimic_dict, randomWord, i, sentence)
     return sentence
 
 
